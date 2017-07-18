@@ -22,6 +22,12 @@
   function transferTouch(process) {
     return function (e) {
       e.preventDefault();
+      var touch = void 0;
+
+      if (!(touch = e.targetTouches[0]) || e.scale && e.scale == 1) {
+        return;
+      }
+
       return process.call(this, e.targetTouches[0], e);
     };
   }
