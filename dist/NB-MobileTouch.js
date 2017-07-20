@@ -50,6 +50,10 @@
       this.swipeBottom = swipeBottom;
       this.swipeRight = swipeRight;
 
+      this.touchstart = this.touchstart.bind(this);
+      this.touchend = this.touchend.bind(this);
+      this.touchmove = this.touchmove.bind(this);
+
       this.bindElEvent();
     },
     isTap: function isTap() {
@@ -96,21 +100,18 @@
       }
     },
     bindElEvent: function bindElEvent() {
-      var _this = this;
-
-      this.el.addEventListener('touchstart', function (e) {
-        return _this.touchstart(e);
-      }, false);
-      this.el.addEventListener('touchmove', function () {
-        return _this.touchmove(e);
-      }, false);
-      this.el.addEventListener('touchend', function () {
-        return _this.touchend(e);
-      }, false);
+      this.el.addEventListener('touchstart', this.touchstart, false);
+      this.el.addEventListener('touchmove', this.touchmove, false);
+      this.el.addEventListener('touchend', this.touchend, false);
+    },
+    unBindElEvent: function unBindElEvent() {
+      this.el.removeEventListener('touchstart', this.touchstart, false);
+      this.el.removeEventListener('touchmove', this.touchmove, false);
+      this.el.removeEventListener('touchend', this.touchend, false);
     }
   });
 
   window.NBMobileTouch = function (options) {
-    return NBMobileTouch(options);
+    return new NBMobileTouch(options);
   };
 })();

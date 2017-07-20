@@ -15,7 +15,7 @@
       if (!(touch = e.targetTouches[0]) || (e.scale && e.scale == 1)) {
         return;
       }
-      
+
       return process.call(this, e.targetTouches[0], e)
     };
   }
@@ -34,6 +34,10 @@
       this.swipeLeft = swipeLeft;
       this.swipeBottom = swipeBottom;
       this.swipeRight = swipeRight;
+
+      this.touchstart = this.touchstart.bind(this);
+      this.touchend = this.touchend.bind(this);
+      this.touchmove = this.touchmove.bind(this);
 
       this.bindElEvent();
     },
@@ -87,11 +91,17 @@
     },
 
     bindElEvent() {
-      this.el.addEventListener('touchstart', (e) => this.touchstart(e), false);
-      this.el.addEventListener('touchmove', () => this.touchmove(e), false);
-      this.el.addEventListener('touchend', () => this.touchend(e), false);
+      this.el.addEventListener('touchstart', this.touchstart, false);
+      this.el.addEventListener('touchmove', this.touchmove, false);
+      this.el.addEventListener('touchend', this.touchend, false);
+    },
+
+    unBindElEvent() {
+      this.el.removeEventListener('touchstart', this.touchstart, false);
+      this.el.removeEventListener('touchmove', this.touchmove, false);
+      this.el.removeEventListener('touchend', this.touchend, false);
     }
   });
 
-  window.NBMobileTouch = (options) => NBMobileTouch(options);
+  window.NBMobileTouch = (options) => new NBMobileTouch(options);
 })();
