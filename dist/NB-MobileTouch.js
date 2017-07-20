@@ -111,7 +111,7 @@
     }
   });
 
-  window.NBMobileTouch = function (options) {
-    return new NBMobileTouch(options);
+  window.NBMobileTouch = function (el, options) {
+    return new NBMobileTouch(el, options);
   };
 })();

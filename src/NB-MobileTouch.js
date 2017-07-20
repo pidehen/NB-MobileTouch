@@ -103,5 +103,5 @@
     }
   });
 
-  window.NBMobileTouch = (options) => new NBMobileTouch(options);
+  window.NBMobileTouch = (el, options) => new NBMobileTouch(el, options);
 })();
