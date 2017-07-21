@@ -21,7 +21,7 @@
 
   function transferTouch(process) {
     return function (e) {
-      e.preventDefault();
+      e.stopPropagation();
       var touch = void 0;
 
       if (!(touch = e.targetTouches[0]) || e.scale && e.scale == 1) {
@@ -85,7 +85,7 @@
     }),
 
     touchend: function touchend(e) {
-      e.preventDefault();
+      e.stopPropagation();
 
       if (this.isTap()) {
         this.tap.call(this, e);

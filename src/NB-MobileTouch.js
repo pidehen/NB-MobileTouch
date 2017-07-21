@@ -9,7 +9,7 @@
 
   function transferTouch(process) {
     return function (e) {
-      e.preventDefault();
+      e.stopPropagation();
       let touch;
 
       if (!(touch = e.targetTouches[0]) || (e.scale && e.scale == 1)) {
@@ -75,7 +75,7 @@
     }),
 
     touchend(e) {
-      e.preventDefault();
+      e.stopPropagation();
 
       if (this.isTap()) {
         this.tap.call(this, e);
